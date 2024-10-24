@@ -12,21 +12,23 @@ function Set (list)
 end
 
 local ALLOWED_FLUIDS_SET = Set({ "Benzene", "Naphtha", "Methane Gas", "Phenol", "Toluene", "Refinery Gas" })
-local FLUIDS_TO_SIDE = {}
-FLUIDS_TO_SIDE["Benzene"] = sides.north -- 5 mb
-FLUIDS_TO_SIDE["Naphtha"] = sides.north -- 5 mb
-FLUIDS_TO_SIDE["Methane Gas"] = sides.east -- 17 mb
-FLUIDS_TO_SIDE["Phenol"] = sides.south -- 6 mb
-FLUIDS_TO_SIDE["Toluene"] = sides.north -- 5 mb
-FLUIDS_TO_SIDE["Refinery Gas"] = sides.west -- 11 mb
+local FLUIDS_TO_SIDE = {
+    ["Benzene"] = sides.down, -- 5 mb
+    ["Naphtha"] = sides.down, -- 5 mb
+    ["Methane Gas"] = sides.east, -- 17 mb
+    ["Phenol"] = sides.south, -- 6 mb
+    ["Toluene"] = sides.down, -- 5 mb
+    ["Refinery Gas"] = sides.west -- 11 mb
+}
 
-local FLUIDS_TO_SLOT = {}
-FLUIDS_TO_SIDE["Benzene"] = 0
-FLUIDS_TO_SIDE["Naphtha"] = 1
-FLUIDS_TO_SIDE["Methane Gas"] = 2
-FLUIDS_TO_SIDE["Phenol"] = 3
-FLUIDS_TO_SIDE["Toluene"] = 4
-FLUIDS_TO_SIDE["Refinery Gas"] = 5
+local FLUIDS_TO_SLOT = {
+    ["Benzene"] = 0,
+    ["Naphtha"] = 1,
+    ["Methane Gas"] = 2,
+    ["Phenol"] = 3,
+    ["Toluene"] = 4,
+    ["Refinery Gas"] = 5
+}
 
 local COOLDOWN_MINUTES = 5
 local MIN_FLUID_VALUE = 1000
