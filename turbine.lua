@@ -2,7 +2,7 @@ local component = require("component")
 local event = require("event")
 local term = require("term")
 
-local battery = component.gt_batterybuffer
+local battery = component.gt_machine
 local fuel_control = component.redstone
 local gpu = component.gpu
 
@@ -23,27 +23,11 @@ function setFuel(state)
 end
 
 function getCharge()
-    local i =  1
-    local charge = battery.getEUStored()
-    while (true) do
-        local slot = battery.getBatteryCharge(i)
-        if (slot == nil) then break end
-        charge = charge + slot
-        i = i + 1
-    end
-    return charge
+    return battery.getEUStored()
 end
 
 function getMaxCharge()
-    local i =  1
-    local charge = battery.getEUMaxStored()
-    while (true) do
-        local slot = battery.getMaxBatteryCharge(i)
-        if (slot == nil) then break end
-        charge = charge + slot
-        i = i + 1
-    end
-    return charge
+    return battery.getEUCapacity()
 end
 
 function enableTurbine(percentage)
