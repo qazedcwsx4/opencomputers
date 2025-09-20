@@ -1,6 +1,7 @@
 local component = require("component")
 local computer = require("computer")
 local sides = require("sides")
+local event = require("event")
 
 local interface = component.me_interface
 local transposer = component.transposer
@@ -56,10 +57,18 @@ end
 
 
 function push_fluid(fluid)
-    transposer.transferFluid(sides.up, FLUIDS_TO_SIDE[fluid], 1000, FLUIDS_TO_SLOT[fluid])
+    transposer.transferFluid(sides.down, sides.up, 4000, FLUIDS_TO_SLOT[fluid])
 end
 
+continue = true
 
+function catch_interrupt()
+    local e = event.pull(5, "interrupted")
+    if e == "interrupted" then
+        print("interrupted")
+        continue = false
+    end
+end
 
 --- STATE MACHINE
 
@@ -134,14 +143,15 @@ function CooldownState:change()
     if computer.uptime() < self.cooldown_until then
         return self
     else
-        return WorkingState.change()
+        return WorkingState:change()
     end
 end
 
 local state = EmptyState:new()
 
-while true do
+while continue do
     state = state:change()
     state:output()
+    catch_interrupt()
     os.sleep(1)
 end
