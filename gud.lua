@@ -29,7 +29,7 @@ end
 local function download_daemon(daemon_name)
     local daemon_string = get_file(DAEMON_GH_SUBPATH .. daemon_name .. ".lua")
     local daemon_path = DAEMON_SYSTEM_PATH .. daemon_name .. ".lua"
-    config_file = io.open(daemon_path)
+    config_file = io.open(daemon_path, "w")
     config_file:write(daemon_string)
     config_file:close()
 end
@@ -51,9 +51,13 @@ end
 local config_name = args[1]
 local config_str = get_file(TEMPLATES_GH_SUBPATH .. config_name)
 
+-- load the chunk and immediately execute it into a config env
+local env = {}
+local chunk = load(config_str, nil, "t", env)
+chunk()
+
 -- expect `enabled` list
-local config = load(config_str)
-download_enabled(config.enabled)
+download_enabled(env.enabled)
 update_config(config_str)
 
 -- restart computer
