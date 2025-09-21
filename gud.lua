@@ -3,6 +3,7 @@ local computer = require("computer")
 
 local CONFIG_PATH = "/etc/rc.cfg"
 local GITHUB_PATH = "https://raw.githubusercontent.com/qazedcwsx4/opencomputers/refs/heads/master/"
+local TEMPLATES_GH_SUBPATH = "templates/"
 local DAEMON_GH_SUBPATH = "daemons/"
 local DAEMON_SYSTEM_PATH = "/etc/rc.d/"
 
@@ -48,7 +49,7 @@ if #args == 0 then
 end
 
 local config_name = args[1]
-local config_str = get_file("configs/" .. config_name)
+local config_str = get_file(TEMPLATES_GH_SUBPATH .. config_name)
 
 -- expect `enabled` list
 local config = load(config_str)
