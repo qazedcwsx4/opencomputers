@@ -1,5 +1,5 @@
-function start(config)
-    print("STARTING SIMPLE TEST WITH CONFIG" .. config)
+function start()
+    print("STARTING SIMPLE TEST WITH CONFIG" .. args)
 end
 
 function stop()
