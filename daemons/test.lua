@@ -1,8 +1,6 @@
 function start()
-    while true do
-        print("STARTING SIMPLE TEST WITH CONFIG" .. args)
-        os.sleep(5)
-    end
+    os.sleep(5)
+    print("STARTING SIMPLE TEST WITH CONFIG" .. args)
 end
 
 function stop()
